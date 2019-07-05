@@ -1,0 +1,10 @@
+__pycache__/
+.idea/
+*.log
+*.pot
+*.pyc
+db.sqlite3
+venv/
+log/
+media/
+loginapp/migrations/
