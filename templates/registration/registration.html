@@ -13,27 +13,28 @@
 </head>
 <body>
 <hgroup>
-    <h4>Login TestApp</h4>
-    {% if form.errors %}
-        <p style="color:red">Your username and password didn't match. Please try again.</p>
-    {% endif %}
+    <h4>Login TestRegistration</h4>
 </hgroup>
-    <form method="post">
-        {% csrf_token %}
-        <input type="hidden" name="next" value="{{ next }}" />
+
+<form method="POST" action="{% url 'Registration' %}">
+      {% csrf_token %}
+        {% for field in form %}
+       
         <div class="group">
-            <input type="text" name="username" value="" autofocus="" required="" id="id_username"><span class="highlight"></span><span class="bar"></span>
-            <label for="id_username">UserName</label>
+            {{ field }}
+            {{ field.label_tag }}
+            {% if field.help_text %}
+            <small style="color: grey">{{ field.help_text }}</small>
+            {% endif %}
+            {% for error in field.errors %}
+            <p style="color: red">{{ error }}</p>
+            {% endfor %}
         </div>
-        <div class="group">
-            <input type="password" name="password" required="" id="id_password"><span class="highlight"></span><span class="bar"></span>
-            <label for="id_password">Password</label>
-        </div>
-        <button type="submit" class="button buttonBlue">Log in
+        {% endfor %}
+     <button type="submit" class="button buttonBlue">Registration
             <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
-        </button>
-    </form>
-    <a href="{% url 'Registration' %}">New user</a>
+     </button>
+  </form>
     <footer>
     <a href="http://www.polymer-project.org/" target="_blank"><img src="https://www.polymer-project.org/images/logos/p-logo.svg"></a>
     </footer>
